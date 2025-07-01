@@ -1,0 +1,8 @@
+- Comando de resintalação da biblioteca node_modules: npm install
+- Comando para instalação do Node: npm init -y
+- Comando para instalação do express: npm install express
+- Comando para formataçao com o Prettier: alt + shift + f
+- Comando para inicializar o servidor: npm start
+- Comando para finalizar o servidor: Ctrl + c
+- Comando para instalação de ferramenta de atualização do servidor: npm install --save-dev nodemon
+- Comando para inicializr como dev para atualização em tempo real: npm run dev
