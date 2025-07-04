@@ -24,7 +24,6 @@ A API permite:
 1. **Clone o repositório:**
  ```bash
 git clone https://github.com//Johnizidro/Api--Upload_IMG
-cd nome-do-projeto
 ```
 
 ## 🧠 Objetivo
