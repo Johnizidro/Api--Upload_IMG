@@ -5,4 +5,6 @@ const router = express.Router();
 
 router.post("/", serverControllers.create);
 
+router.put("/:id", serverControllers.update)
+
 module.exports = router;

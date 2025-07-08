@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API - Tarefas</title>
+  </head>
+  <body>
+    <input id="descricao" placeholder="Descrição" />
+    <button Onclick="adicionartarefa()">Adicionar Tarefa</button>
+    <button Onclick="excluirtarefa()">Excluir Tarefa</button>
+
+    <script>
+      const API = `http://localhost:300/tarefas`;
+      function adicionartarefa() {
+        const descricao = document.getElementById("descricao").value;
+        fetch(API, {
+          method: 'POST',
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ descricao }),
+        });
+      }
+    </script>
+  </body>
+</html>

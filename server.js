@@ -48,29 +48,4 @@ app.get("/", (req, res) => {
 //   }
 // });
 
-// app.put("/tarefas/:id", async (req, res) => {
-//   const { id } = req.params;
-//   const { descricao, titulo } = req.body;
 
-//   if (!descricao && !titulo) {
-//     return res
-//       .status(400)
-//       .json({ erro: "Preencha a nova descrição ou o novo título" });
-//   }
-
-//   try {
-//     const tarefas = await SerVer.findByIdAndUpdate(
-//       id,
-//       { titulo, descricao }, // Atualiza ambos se existirem
-//       { new: true } // Retorna o documento atualizado
-//     );
-
-//     if (!tarefas) {
-//       return res.status(404).json({ erro: "Tarefa não existente" });
-//     }
-
-//     res.json(tarefas);
-//   } catch (error) {
-//     res.status(500).json({ erro: "Erro ao atualizar tarefa" });
-//   }
-// });
