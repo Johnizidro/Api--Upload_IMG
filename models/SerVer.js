@@ -6,4 +6,3 @@ const SerVerSchema = new mongoose.Schema({
 
 module.exports = mongoose.model("SerVer", SerVerSchema);
 
-//

@@ -7,4 +7,3 @@
 - Comando para instalação de ferramenta de atualização do servidor: npm install --save-dev nodemon
 - Comando para inicializr como dev para atualização em tempo real: npm run dev
 - Comando para testar um arquivo só: node "nome_arquivo.extensao"
-//
