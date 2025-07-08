@@ -11,12 +11,12 @@
     <button Onclick="excluirtarefa()">Excluir Tarefa</button>
 
     <script>
-      const API = `http://localhost:300/tarefas`;
+      const API = `http://localhost:3000/tarefas`;
       function adicionartarefa() {
         const descricao = document.getElementById("descricao").value;
         fetch(API, {
           method: 'POST',
-          headers: { "Content-Type": "application/json" },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ descricao }),
         });
       }

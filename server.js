@@ -1,16 +1,15 @@
 const express = require("express");
-
 require("./config/db");
-
 const tarefasRoutes = require("./routes/serverRoutes");
-
 const SerVer = require("./models/SerVer");
-
 const app = express();
-
 const PORT = 3000;
-
 app.use(express.json());
+const cors = require("cors");
+
+app.use(cors());
+
+
 
 app.use("/tarefas", tarefasRoutes);
 

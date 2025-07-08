@@ -1,13 +1,13 @@
 const SerVer = require("../models/SerVer");
 
 exports.create = async (req, res) => {
-  const { descricao, titulo } = req.body;
+  const { descricao} = req.body;
 
-  if (!descricao || !titulo) {
-    return res.status(400).json({ erro: "Preencha a descrição e o titulo" });
+  if (!descricao) {
+    return res.status(400).json({ erro: "Preencha a descrição" });
   }
   try {
-    const novaTarefa = new SerVer({ descricao, titulo });
+    const novaTarefa = new SerVer({ descricao});
     await novaTarefa.save();
     res.status(201).json(novaTarefa);
   } catch (error) {
@@ -17,18 +17,18 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
   const { id } = req.params;
-  const { descricao, titulo } = req.body;
+  const { descricao} = req.body;
 
-  if (!descricao && !titulo) {
+  if (!descricao) {
     return res
       .status(400)
-      .json({ erro: "Preencha a nova descrição ou o novo título" });
+      .json({ erro: "Preencha a nova descrição" });
   }
 
   try {
     const tarefas = await SerVer.findByIdAndUpdate(
       id,
-      { titulo, descricao }, 
+      { descricao }, 
       { new: true } 
     );
 
