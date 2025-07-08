@@ -1,6 +1,8 @@
 const express = require("express");
 
-require("./db");
+require("./config/db");
+
+const tarefasRoutes = require("./routes/serverRoutes");
 
 const SerVer = require("./models/SerVer");
 
@@ -10,71 +12,65 @@ const PORT = 3000;
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.status(200).send("Bem Vindo à API!");
-});
-
-app.post("/tarefas", async (req, res) => {
-  const { descricao } = req.body;
-  if (!descricao) {
-    return res.status(400).json({ erro: "Preencha a descrição" });
-  }
-  try {
-    const novaTarefa = new SerVer({ descricao });
-    await novaTarefa.save();
-    res.status(201).json(novaTarefa);
-  } catch (error) {
-    res.status(500).json({ erro: "Erro ao incluir tarefa" });
-  }
-});
-
-app.delete("/tarefas/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    const tarefas = await SerVer.findByIdAndDelete(id);
-    if (!tarefas) {
-      return res.status(404).json({ erro: "Tarefa não encontrada" });
-    }
-    res.status(204).send();
-  } catch (error) {
-    res.status(500).json({ erro: "Erro ao remover tarefa" });
-  }
-});
-
-app.get("/tarefas/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    const tarefas = await SerVer.findById(id);
-    if (!tarefas) {
-      return res.status(404).json({ erro: "Tarefa não encontrada" });
-    }
-    res.status(219).json(tarefas);
-  } catch (error) {
-    res.status(500).json({ erro: "Erro, tarefa não encontrada" });
-  }
-});
-
-app.put("/tarefas/:id", async (req, res) => {
-  const { id } = req.params;
-  const { descricao } = req.body;
-  if (!descricao) {
-    return res.status(400).json({ erro: "Preencha a nova descrição" });
-  }
-  try {
-    const tarefas = await SerVer.findByIdAndUpdate(
-      id,
-      { descricao },
-      { new: true }
-    );
-    if (!tarefas) {
-      return res.status(404).json({ erro: "Tarefa não existente" });
-    }
-    res.json(tarefas);
-  } catch (error) {
-    res.status(500).json({ erro: "Erro ao atualizar tarefa" });
-  }
-});
+app.use("/tarefas", tarefasRoutes);
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
+
+app.get("/", (req, res) => {
+  res.status(200).send("Bem Vindo à API!");
+});
+
+// app.delete("/tarefas/:id", async (req, res) => {
+//   const { id } = req.params;
+//   try {
+//     const tarefas = await SerVer.findByIdAndDelete(id);
+//     if (!tarefas) {
+//       return res.status(404).json({ erro: "Tarefa não encontrada" });
+//     }
+//     res.status(204).send();
+//   } catch (error) {
+//     res.status(500).json({ erro: "Erro ao remover tarefa" });
+//   }
+// });
+
+// app.get("/tarefas/:id", async (req, res) => {
+//   const { id } = req.params;
+//   try {
+//     const tarefas = await SerVer.findById(id);
+//     if (!tarefas) {
+//       return res.status(404).json({ erro: "Tarefa não encontrada" });
+//     }
+//     res.status(219).json(tarefas);
+//   } catch (error) {
+//     res.status(500).json({ erro: "Erro, tarefa não encontrada" });
+//   }
+// });
+
+// app.put("/tarefas/:id", async (req, res) => {
+//   const { id } = req.params;
+//   const { descricao, titulo } = req.body;
+
+//   if (!descricao && !titulo) {
+//     return res
+//       .status(400)
+//       .json({ erro: "Preencha a nova descrição ou o novo título" });
+//   }
+
+//   try {
+//     const tarefas = await SerVer.findByIdAndUpdate(
+//       id,
+//       { titulo, descricao }, // Atualiza ambos se existirem
+//       { new: true } // Retorna o documento atualizado
+//     );
+
+//     if (!tarefas) {
+//       return res.status(404).json({ erro: "Tarefa não existente" });
+//     }
+
+//     res.json(tarefas);
+//   } catch (error) {
+//     res.status(500).json({ erro: "Erro ao atualizar tarefa" });
+//   }
+// });
